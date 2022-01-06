@@ -1,0 +1,326 @@
+
+
+
+<script src="http://www.google.com/jsapi" type="text/javascript"></script>
+<script type="text/javascript">google.load("jquery", "1.3.2");</script>
+
+<style type="text/css">
+    body {
+        font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+        font-weight:300;
+        font-size:18px;
+        margin-left: auto;
+        margin-right: auto;
+        width: 1100px;
+    }
+
+    h1 {
+        font-weight:300;
+    }
+
+    .disclaimerbox {
+        background-color: #eee;
+        border: 1px solid #eeeeee;
+        border-radius: 10px ;
+        -moz-border-radius: 10px ;
+        -webkit-border-radius: 10px ;
+        padding: 20px;
+    }
+
+    video.header-vid {
+        height: 140px;
+        border: 1px solid black;
+        border-radius: 10px ;
+        -moz-border-radius: 10px ;
+        -webkit-border-radius: 10px ;
+    }
+
+    img.header-img {
+        height: 140px;
+        border: 1px solid black;
+        border-radius: 10px ;
+        -moz-border-radius: 10px ;
+        -webkit-border-radius: 10px ;
+    }
+
+    img.rounded {
+        border: 1px solid #eeeeee;
+        border-radius: 10px ;
+        -moz-border-radius: 10px ;
+        -webkit-border-radius: 10px ;
+    }
+
+    a:link,a:visited
+    {
+        color: #1367a7;
+        text-decoration: none;
+    }
+    a:hover {
+        color: #208799;
+    }
+
+    td.dl-link {
+        height: 160px;
+        text-align: center;
+        font-size: 22px;
+    }
+    td {
+    line-height: 130%;
+    }
+    tr.spaceUnder>td {
+        padding-bottom: 10px;
+    }
+    .layered-paper-big { /* modified from: http://css-tricks.com/snippets/css/layered-paper/ */
+        box-shadow:
+                0px 0px 1px 1px rgba(0,0,0,0.35), /* The top layer shadow */
+                5px 5px 0 0px #fff, /* The second layer */
+                5px 5px 1px 1px rgba(0,0,0,0.35), /* The second layer shadow */
+                10px 10px 0 0px #fff, /* The third layer */
+                10px 10px 1px 1px rgba(0,0,0,0.35), /* The third layer shadow */
+                15px 15px 0 0px #fff, /* The fourth layer */
+                15px 15px 1px 1px rgba(0,0,0,0.35), /* The fourth layer shadow */
+                20px 20px 0 0px #fff, /* The fifth layer */
+                20px 20px 1px 1px rgba(0,0,0,0.35), /* The fifth layer shadow */
+                25px 25px 0 0px #fff, /* The fifth layer */
+                25px 25px 1px 1px rgba(0,0,0,0.35); /* The fifth layer shadow */
+        margin-left: 10px;
+        margin-right: 45px;
+    }
+
+
+    .layered-paper { /* modified from: http://css-tricks.com/snippets/css/layered-paper/ */
+        box-shadow:
+                0px 0px 1px 1px rgba(0,0,0,0.35), /* The top layer shadow */
+                5px 5px 0 0px #fff, /* The second layer */
+                5px 5px 1px 1px rgba(0,0,0,0.35), /* The second layer shadow */
+                10px 10px 0 0px #fff, /* The third layer */
+                10px 10px 1px 1px rgba(0,0,0,0.35); /* The third layer shadow */
+        margin-top: 5px;
+        margin-left: 10px;
+        margin-right: 30px;
+        margin-bottom: 5px;
+    }
+
+    .vert-cent {
+        position: relative;
+        top: 50%;
+        transform: translateY(-50%);
+    }
+
+    hr
+    {
+        border: 0;
+        height: 1.5px;
+        background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));
+    }
+</style>
+
+<html>
+  <head>
+        <title>RHOI</title>
+        <meta property="og:title" content="RHOI" />
+  </head>
+
+  <body>
+    <br>
+    <center>
+    <span style="font-size:42px">Reconstructing Hand-Object Interactions in the Wild </span>
+
+    <br>
+    <br>
+      <table align=center width=800px>
+
+     <tr>
+      <span style="font-size:22px"><a href="https://people.eecs.berkeley.edu/~zhecao/">Zhe Cao</a></span><sup>*</sup>&nbsp;&nbsp;&nbsp;&nbsp;
+      <span style="font-size:22px"><a href="https://people.eecs.berkeley.edu/~ilija/">Ilija Radosavovic</a></span><sup>*</sup>&nbsp;&nbsp;&nbsp;&nbsp;
+      <span style="font-size:22px"><a href="https://people.eecs.berkeley.edu/~kanazawa/">Angjoo Kanazawa</a></span>&nbsp;&nbsp;&nbsp;&nbsp;
+      <span style="font-size:22px"><a href="http://www.eecs.berkeley.edu/~malik/">Jitendra Malik</a></span>
+   </tr>
+
+     <tr>
+       <td align=center colspan="2" style="font-size:22px">
+       <center>
+       	University of California, Berkeley
+       </center>
+       </td>
+      </tr>
+    </table>
+      <br>
+      <table align=center width=820px>
+              <tr>
+                  <td width=700px>
+                    <center>
+                        <a href="https://arxiv.org/abs/2012.09856"><img src="teaser.jpg" width="720px"></img></a><br>
+                  </center>
+                  </td>
+              </tr>
+
+              <tr>
+                <td colspan="3"> <br>
+                  <i>Abstract:</i> In this work we explore reconstructing hand-object interactions in the wild. The core challenge of this problem is the lack of appropriate 3D labeled data. To overcome this issue, we propose an optimization-based procedure which does not require direct 3D supervision. The general strategy we adopt is to exploit all available related data (2D bounding boxes, 2D hand keypoints, 2D instance masks, 3D object models, 3D in-the-lab MoCap) to provide constraints for the 3D reconstruction. Rather than optimizing the hand and object individually, we optimize them jointly which allows us to impose additional constraints based on hand-object contact, collision, and occlusion. Our method produces compelling reconstructions on the challenging in-the-wild data from the EPIC Kitchens and the 100 Days of Hands datasets, across a range of object categories. Quantitatively, we demonstrate that our approach compares favorably to existing approaches in the lab settings where ground truth 3D annotations are available.
+		</td>
+              </tr>
+          </table>
+        <hr>
+                <center><h1>Reconstruction Procedure</h1></center>
+                <table align=center width=720px>
+                    <tr>
+                        <td width=1200px colspan="3">
+                          <center>
+                              <img src="pipeline.jpg" width="720px"></img><br>
+                        </center>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width=600px colspan="3">
+                              <span style="font-size:14px"><i>Reconstruction procedure.</i> To reconstruct hand-object interactions in the wild, we leverage all available related data (2D keypoints, 2D instance masks, 3D object models, 3D in-the-lab MoCap) through an optimization-based procedure that consists of four steps: (a) hand pose estimation by 2D keypoints fitting, (b) object pose estimation via differentiable rendering, (c) joint optimization for spatial arrangement, and (d) pose refinement using 3D contact priors.
+                        </td>
+                    </tr>
+                </table>
+                <br>
+                <table align=center width=720px>
+                    <tr>
+                        <td width=1200px colspan="3">
+                          <center>
+                              <img src="intermediate.jpg" width="720px"></img><br>
+                        </center>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width=600px colspan="3">
+                              <span style="font-size:14px"><i>Intermediate results.</i> Top row: input images. 2nd row: results from individually optimizing hand and object. 3rd row: results from joint optimization (two viewpoints per example). Bottom row: results after the refinement.
+                        </td>
+                    </tr>
+                </table>
+                <br>
+        <hr>
+         <!-- <table align=center width=550px> -->
+                <center><h1>Qualitative Results</h1></center>
+                <table align=center width=720px>
+                    <tr>
+                        <td width=1200px colspan="3">
+                          <center>
+                              <img src="qual_epic.jpg" width="720px"></img><br>
+                        </center>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width=1200px colspan="3">
+                          <center>
+                              <img src="qual_100doh.jpg" width="720px"></img><br>
+                        </center>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width=600px colspan="3">
+                              <span style="font-size:14px"><i>Qualitative results</i> on images from the EPIC kitchen dataset (row 1-2) and 100 Days of Hands dataset (row 3-4). Our method produces reconstructions of reasonably high-quality across a range of viewpoints, activities, and objects.
+                        </td>
+                    </tr>
+                </table>
+                <br>
+                <table align=center width=720px>
+                    <tr>
+                        <td width=1200px colspan="3">
+                          <center>
+                              <img src="qual_additional.jpg" width="720px"></img><br>
+                        </center>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width=600px colspan="3">
+                              <span style="font-size:14px"><i>Additional qualitative results.</i> Our procedure produces promising results across a range of scenarios and objects.
+                        </td>
+                    </tr>
+                </table>
+                <br>
+    <hr>
+         <!-- <table align=center width=550px> -->
+                <center><h1>Failure Cases</h1></center>
+                <table align=center width=720px>
+                    <tr>
+                        <td width=1200px colspan="3">
+                          <center>
+                              <img src="qual_failure.jpg" width="720px"></img><br>
+                        </center>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width=600px colspan="3">
+                              <span style="font-size:14px"><i>Failure cases</i>. We show representative failure cases of our reconstruction procedure.  We observe several failure modes due to the failure of the individual steps in our procedure:hand pose estimation (first column), object pose estimation (columns 2-4), and the joint optimization (last column).
+                        </td>
+                    </tr>
+                </table>
+                <br>
+    <hr>
+                <center><h1>Collected CAD models</h1></center>
+                <table align=center width=800px>
+                    <tr>
+                        <td width=1200px colspan="3">
+                          <center>
+                              <img src="models_web.jpg" width="800px"></img><br>
+                        </center>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width=600px colspan="3">
+                              <span style="font-size:14px"><i>Collected Models</i>. We collected 120 object models with both  within and across category variation.
+                        </td>
+                    </tr>
+                </table>
+                <br>  
+    <hr>
+                <center><h1>Dataset</h1></center>
+                <table align=center width=800px>
+                    <tr>
+                        <td width=1000px colspan="3">
+                          <center>
+                              <img src="mow.gif" width="800px"></img><br>
+                        </center>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width=600px colspan="3">
+                              <br>
+                              <span style="font-size:16px"><i>MOW Dataset</i>. We collected a 3D dataset of humans Manipulating Objects in-the-Wild (MOW). Follow the instructions in this <a href="https://github.com/ZheC/MOW">github repo</a> to download and use the data.
+                        </td>
+                    </tr>
+                </table>
+                <br>               
+    <hr>
+      <table align=center width=800>
+       <center><h1>Paper</h1></center>
+          <tr>
+            <td><a href="https://arxiv.org/abs/2012.09856"><img style="width:400px" src="thumbnail.png"/></a></td>
+            <td><span style="font-size:14pt">Cao*, Radosavovic*, Kanazawa, Malik.<br><br>
+              Reconstructing Hand-Object Interaction<br> in the Wild<br><br>
+             ICCV, 2021. <br><br>
+		<a href="https://arxiv.org/abs/2012.09856">[Paper]</a> &nbsp; &nbsp;
+                <a href="bibtex.txt">[Bibtex]</a>
+              </td>
+        </tr>
+      </table>
+    <br>
+    <!--
+    <hr>
+      <center><h1>Code</h1></center>
+      <tr>
+        <td>
+          <span style="font-size:28px">&nbsp;<a href='#'>[GitHub]</a>  (coming soon)
+        </td>
+      <br>
+      -->
+      <hr>
+            <table align=center width=1100px>
+                <tr>
+                    <td>
+                      <left>
+                <center><h1>Acknowledgements</h1></center>
+                We thank members of the BAIR community for helpful discussions and comments. This webpage template was borrowed from some <a href="https://jonbarron.info/">colorful folks</a>.
+            </left>
+        </td>
+        </tr>
+        </table>
+
+        <br><br>
+</body>
+</html>

@@ -1,0 +1,6 @@
+@article{rhoi2020,
+  title={Reconstructing Hand-Object Interactions in the Wild},
+  author={Cao, Zhe and Radosavovic, Ilija and Kanazawa, Angjoo and Malik, Jitendra},
+  journal={ICCV},
+  year={2021}
+}

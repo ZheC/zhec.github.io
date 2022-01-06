@@ -1,0 +1,10 @@
+@incollection{sfCaoKHM2019,
+  author = {Zhe Cao and
+  Abhishek Kar and
+  Christian H\"ane and
+  Jitendra Malik},
+  title = {Learning Independent Object Motion
+    from Unlabelled Stereoscopic Videos},
+  booktitle = CVPR,
+  year = {2019},
+  }
